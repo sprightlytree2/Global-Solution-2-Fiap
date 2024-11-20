@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require("cors");
 const { IamAuthenticator } = require('ibm-watson/auth');
 const AssistantV2 = require('ibm-watson/assistant/v2');
 require('dotenv').config();
@@ -18,12 +19,13 @@ const assistant = new AssistantV2({
 
 // Middleware
 app.use(bodyParser.json());
+app.use(cors());
 
 // Endpoint para processar perguntas
 app.post('/pergunta', async (req, res) => {
   const { mensagem } = req.body;
 
-  if (!emnsagem) {
+  if (!mensagem) {
     return res.status(400).json({ error: 'Pergunta não fornecida' });
   }
 
