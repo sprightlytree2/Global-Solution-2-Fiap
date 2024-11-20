@@ -61,10 +61,10 @@ app.post('/pergunta', async (req, res) => {
 
       responseBody[0].suggestions.map(item => (listaSugestoes.push(item.label)));
 
-      const indexParaRemover = listaSugestoes.findIndex("Nenhum dos itens acima");
+      const indexParaRemover = listaSugestoes.findIndex(item => item == "Nenhum dos itens acima");
 
       if(indexParaRemover != -1)
-        listaSugestoes.filter(_, index => index != indexParaRemover)
+        listaSugestoes.splice(indexParaRemover, 1);
 
       res.json({ response: { resposta: "", listaSugestoes: listaSugestoes} });
     }
