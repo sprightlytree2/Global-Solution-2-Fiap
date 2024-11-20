@@ -10,7 +10,7 @@ const port = 3000;
 
 // Configuração do Watson Assistant
 const assistant = new AssistantV2({
-  version: '2023-11-17', // Insira a versão adequada para sua integração
+  version: '2024-08-25', // Insira a versão adequada para sua integração
   authenticator: new IamAuthenticator({
     apikey: process.env.ASSISTANT_API_KEY,
   }),
