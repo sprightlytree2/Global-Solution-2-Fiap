@@ -23,9 +23,9 @@ app.use(cors());
 
 // Endpoint para processar perguntas
 app.post('/pergunta', async (req, res) => {
-  const { mensagem } = req.body;
+  const { question } = req.body;
 
-  if (!mensagem) {
+  if (!question) {
     return res.status(400).json({ error: 'Pergunta não fornecida' });
   }
 
@@ -43,7 +43,7 @@ app.post('/pergunta', async (req, res) => {
       sessionId,
       input: {
         'message_type': 'text',
-        'text': mensagem,
+        'text': question,
       },
     });
 
