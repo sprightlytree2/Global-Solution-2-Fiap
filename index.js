@@ -47,8 +47,25 @@ app.post('/pergunta', async (req, res) => {
       },
     });
 
-    const respostaBot = response.result.output.generic.map(item => item.text).join('\n');
-    res.json({ resposta: respostaBot });
+    const responseBody = response.result.output.generic;
+
+    const tipoResposta = responseBody.map(item => item.response_type).join('\n');
+
+    if(tipoResposta == "text"){
+      const respostaBot = responseBody.map(item => item.text).join('\n');
+      res.json({ response: { resposta: respostaBot, listaSugestoes: []} });
+    }
+
+    if(tipoResposta == "suggestion"){
+      var listaSugestoes = [];
+
+      responseBody[0].suggestions.map(item => (listaSugestoes.push(item.label)));
+      
+      res.json({ response: { resposta: "", listaSugestoes: listaSugestoes} });
+    }
+
+    else
+      res.status(400).json("Não entendi a pergunta");
 
   } 
   catch (error) {
