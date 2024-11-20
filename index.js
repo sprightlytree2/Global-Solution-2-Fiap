@@ -48,7 +48,7 @@ app.post('/pergunta', async (req, res) => {
     });
 
     const respostaBot = response.result.output.generic.map(item => item.text).join('\n');
-    res.json({ response: respostaBot });
+    res.json({ resposta: respostaBot });
 
   } 
   catch (error) {
